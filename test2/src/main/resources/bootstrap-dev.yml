@@ -1,0 +1,42 @@
+server:
+  port: 8085
+
+debug: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/z_smf?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+
+nacos:
+  server-addr: 127.0.0.1:8848
+
+#seata:
+#  tx-service-group: my_test_tx_group
+#  service:
+#    grouplist: 127.0.0.1:8091
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+client_id: operation_platform
+client_secret: 45370bf2b09dc34386f9b583d8e7616d
+
+
+#seata:
+#  enabled: true
+#  applicationId: ${spring.application.name}
+#  tx-service-group: test-steata
+#  service:
+#    vgroup-mapping:
+#      test-steata: "test-steata"
+#    grouplist:
+#      default: 127.0.0.1:8091
+#  config:
+#    type: file
+#  registry:
+#    type: file
+
+

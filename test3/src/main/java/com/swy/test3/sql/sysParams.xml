@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sysParams">
+    <select id="getSysParamsListPaged" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT a.* FROM sys_dictionary a
+        GROUP BY a.keyCode
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="getSysParamsListByCodePaged" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT a.* FROM sys_dictionary a
+        WHERE a.keyCode = #{keyCode}
+        ORDER BY orderNum
+    </select>
+
+    <update id="updateSysParam" parameterType="java.util.Map">
+        UPDATE sys_dictionary
+        SET keyCode = #{keyCode},keyName = #{keyName}
+        WHERE keyCode = #{oldKeyCode}
+    </update>
+
+    <select id="isExistKeyCode" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) AS num
+        FROM sys_dictionary a
+        WHERE a.keyCode = #{keyCode}
+        <if test="oldKeyCode != null">
+            AND a.keyCode != #{oldKeyCode}
+        </if>
+    </select>
+    
+    <select id="isExistKeyValue" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) AS num
+        FROM sys_dictionary a
+        WHERE a.keyCode = #{keyCode}
+        AND a.keyValue = #{keyValue}
+        <if test="id != null">
+            AND a.id != #{id}
+        </if>
+    </select>
+
+
+
+</mapper>

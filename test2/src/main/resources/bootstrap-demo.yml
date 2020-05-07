@@ -1,0 +1,14 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/swy_ot?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+
+nacos:
+  server-addr: 127.0.0.1:8848
+
+client_id: operation_platform
+client_secret: 45370bf2b09dc34386f9b583d8e7616d

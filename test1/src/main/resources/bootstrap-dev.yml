@@ -1,0 +1,39 @@
+server:
+  port: 8084
+
+debug: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+  jmx:
+    enabled: false
+    default-domain: test
+
+nacos:
+  server-addr: 127.0.0.1:8848
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+client_id: operation_platform
+client_secret: 45370bf2b09dc34386f9b583d8e7616d
+
+
+
+#seata:
+#  tx-service-group: test1-seata-service-group
+#  service:
+#    vgroup-mapping:
+#      test1-seata-service-group: default
+#    default:
+#      grouplist: 127.0.0.1:8091
+#    enable-degrade: false
+#    disable-global-transaction: false
+#  registry:
+#    type: file
+#  config:
+#    type: file
