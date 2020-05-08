@@ -67,9 +67,6 @@ public class SeataTransactionalTemplate {
                     this.beginTransaction(txInfo, tx);
                     rs = null;
 
-                    String xid = tx.getXid();
-                    LOGGER.info("================XID:{}==============", xid);
-
                     try {
                         rs = business.execute();
                     } catch (Throwable var16) {
@@ -77,8 +74,8 @@ public class SeataTransactionalTemplate {
                         this.completeTransactionAfterThrowing(txInfo, tx, var16);
                         throw var16;
                     }
-                    this.commitTransaction(tx);
 
+                    this.commitTransaction(tx);
                     ex = rs;
                 } finally {
                     this.triggerAfterCompletion();
