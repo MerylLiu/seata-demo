@@ -1,7 +1,9 @@
 package com.swy;
 
 import com.example.common.DistTransApplication;
+import com.example.common.RestTemplateFactory;
 import com.jds.core.common.ServiceLocator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,11 +15,13 @@ import org.springframework.web.client.RestTemplate;
 //@SpringCloudApplication
 @DistTransApplication
 public class Test1Application {
+    @Autowired
+    private RestTemplateFactory restTemplateFactory;
 
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        return restTemplateFactory.getRestTemplate();
     }
 
     public static void main(String[] args) {

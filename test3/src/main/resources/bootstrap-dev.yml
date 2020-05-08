@@ -39,9 +39,9 @@ client_secret: 45370bf2b09dc34386f9b583d8e7616d
 #    type: file
 #  registry:
 #    type: file
-logging:
-  level:
-    root: warn
+#logging:
+#  level:
+#    root: warn
 
 #seata:
 #  tx-service-group: sywlgroup

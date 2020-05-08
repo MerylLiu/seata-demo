@@ -1,7 +1,7 @@
 package com.example.common.seata;
 
 
-import config.YamlConfigFactory;
+import com.example.common.config.YamlConfigFactory;
 import io.seata.config.springcloud.EnableSeataSpringConfig;
 import io.seata.spring.annotation.GlobalTransactionScanner;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;

@@ -1,15 +1,15 @@
-package config;
+package com.example.common.config;
 
+import com.alibaba.fastjson.JSON;
+import com.example.common.seata.SeataTransactionalTemplate;
 import io.seata.common.exception.ShouldNeverHappenException;
 import io.seata.config.ConfigurationChangeEvent;
 import io.seata.config.ConfigurationChangeListener;
 import io.seata.config.ConfigurationFactory;
 import io.seata.rm.GlobalLockTemplate;
-import io.seata.spring.annotation.GlobalTransactionalInterceptor;
 import io.seata.tm.api.DefaultFailureHandlerImpl;
 import io.seata.tm.api.FailureHandler;
 import io.seata.tm.api.TransactionalExecutor;
-import io.seata.tm.api.TransactionalTemplate;
 import io.seata.tm.api.transaction.NoRollbackRule;
 import io.seata.tm.api.transaction.RollbackRule;
 import io.seata.tm.api.transaction.TransactionInfo;
@@ -27,9 +27,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class DistTransactionInterceptor implements ConfigurationChangeListener, MethodInterceptor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalTransactionalInterceptor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DistTransactionInterceptor.class);
     private static final FailureHandler DEFAULT_FAIL_HANDLER = new DefaultFailureHandlerImpl();
-    private final TransactionalTemplate transactionalTemplate = new TransactionalTemplate();
+    private final SeataTransactionalTemplate transactionalTemplate = new SeataTransactionalTemplate();
     private final GlobalLockTemplate<Object> globalLockTemplate = new GlobalLockTemplate();
     private final FailureHandler failureHandler;
     private volatile boolean disable;
@@ -74,7 +74,7 @@ public class DistTransactionInterceptor implements ConfigurationChangeListener, 
 
     private Object handleGlobalTransaction(final MethodInvocation methodInvocation) throws Throwable {
         try {
-            return this.transactionalTemplate.execute(new TransactionalExecutor() {
+            Object res = this.transactionalTemplate.execute(new TransactionalExecutor() {
                 public Object execute() throws Throwable {
                     return methodInvocation.proceed();
                 }
@@ -127,6 +127,8 @@ public class DistTransactionInterceptor implements ConfigurationChangeListener, 
                     return transactionInfo;
                 }
             });
+
+            return res;
         } catch (TransactionalExecutor.ExecutionException var5) {
             TransactionalExecutor.Code code = var5.getCode();
             switch (code) {

@@ -24,7 +24,7 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         System.out.println("===============XID:" + xid + "==================");
 
 
-        if (1 == 1) throw new BizException("errdddd");
+//        if (1 == 1) throw new BizException("errdddd test3");
     }
 
     @Override

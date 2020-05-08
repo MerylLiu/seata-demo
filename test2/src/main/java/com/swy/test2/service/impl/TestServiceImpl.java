@@ -35,7 +35,7 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         Map param = new HashMap();
         String res = restTemplate.postForObject(url, param, String.class);
 
-//        if (1 == 1) throw new BizException("errdddd");
+        if (1 == 1) throw new BizException("errdddd test2");
     }
 
     @Override
